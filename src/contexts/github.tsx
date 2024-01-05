@@ -13,7 +13,6 @@ export const GithubProvider = ({ children }: { children: React.ReactNode }) => {
     ;(async () => {
       try {
         const profiles = await AsyncStorage.getItem("@profileHistory")
-        console.log(profiles)
         if (profiles) {
           setUserProfile(JSON.parse(profiles))
         }

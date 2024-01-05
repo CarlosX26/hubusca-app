@@ -6,6 +6,7 @@ export const HomeWrapper = styled.View`
   flex: 1;
   justify-content: start;
   align-items: center;
+  background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
 `
 
 export const ButtonSearch = styled.TouchableOpacity`

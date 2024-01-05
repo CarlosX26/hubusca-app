@@ -11,14 +11,18 @@ import { useState } from "react"
 import { Icons } from "../../components/Icons"
 import { CardUser } from "../../components/CardUser"
 import * as Animatable from "react-native-animatable"
+import { useGithubContext } from "../../contexts/github"
 
 export const Home = () => {
   const [showField, setShowField] = useState(false)
   const [username, setUsername] = useState("")
 
+  const { getProfile, userProfile, clearSearch } = useGithubContext()
+
   const hiddenInputSearch = () => {
     if (!Boolean(username.trim())) {
       setShowField(false)
+      clearSearch()
     }
   }
 
@@ -65,15 +69,15 @@ export const Home = () => {
             onBlur={hiddenInputSearch}
             onChangeText={setUsername}
           />
-          <ButtonSearchInput>
+          <ButtonSearchInput onPress={() => getProfile(username)}>
             <Icons.Search size={32} />
           </ButtonSearchInput>
         </InputWrapper>
       )}
 
-      {!username && <TextInfo>* Pesquise por usuários do Github</TextInfo>}
+      {!userProfile && <TextInfo>* Pesquise por usuários do Github</TextInfo>}
 
-      {username && <CardUser />}
+      {userProfile && <CardUser />}
     </HomeWrapper>
   )
 }

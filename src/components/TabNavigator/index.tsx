@@ -1,6 +1,7 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { Home } from "../../screens/Home"
 import { Icons } from "../Icons"
+import { History } from "../../screens/History"
 
 const Tab = createBottomTabNavigator()
 
@@ -23,6 +24,15 @@ export const TabNavigator = () => {
         options={{
           tabBarIcon: ({ color, size }) => {
             return <Icons.Home color={color} size={size} />
+          },
+        }}
+      />
+      <Tab.Screen
+        name="History"
+        component={History}
+        options={{
+          tabBarIcon: ({ color, size }) => {
+            return <Icons.History color={color} size={size} />
           },
         }}
       />

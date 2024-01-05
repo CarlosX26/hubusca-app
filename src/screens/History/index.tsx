@@ -1,47 +1,36 @@
+import { FlatList } from "react-native"
+import { useGithubContext } from "../../contexts/github"
 import { TextRegular } from "../../theme/typography"
 import {
   BoxInfo,
   CardSearchedAvatar,
   CardSearchedUser,
   HistoryWrapper,
-  ListSearchedUsers,
 } from "./styles"
 
 export const History = () => {
-  const data: {
-    id: number
-    username: string
-    userlogin: string
-    location: string
-  }[] = [
-    {
-      id: 0,
-      username: "Doguinho",
-      userlogin: "Doguinho login",
-      location: "Santa Inês/MA",
-    },
-  ]
+  const { profileHistory } = useGithubContext()
 
   return (
     <HistoryWrapper>
       <TextRegular fontSize={32}>Buscas recentes</TextRegular>
 
-      {/* <CardSearchedUser>
-        <CardSearchedAvatar
-          source={require("../../../assets/profile_example.jpg")}
-        />
+      <FlatList
+        style={{ marginTop: 32 }}
+        data={profileHistory}
+        renderItem={({ item }) => (
+          <CardSearchedUser>
+            <CardSearchedAvatar source={{ uri: item.avatar_url }} />
 
-        <BoxInfo>
-          <TextRegular fontSize={20}>Doguinho</TextRegular>
-          <TextRegular fontSize={20}>Doguinho</TextRegular>
-          <TextRegular fontSize={20}>Doguinho</TextRegular>
-        </BoxInfo>
-      </CardSearchedUser> */}
-      {/* <ListSearchedUsers
-        data={data}
-        renderItem={({ item }) => <CardSearchedUser key={}/>}
-        // keyExtractor={(item) => item.id}
-      /> */}
+            <BoxInfo>
+              <TextRegular fontSize={20}>{item.name}</TextRegular>
+              <TextRegular fontSize={20}>{item.login}</TextRegular>
+              {/* <TextRegular fontSize={20}>Doguinho</TextRegular> */}
+            </BoxInfo>
+          </CardSearchedUser>
+        )}
+        keyExtractor={(item) => item.login}
+      />
     </HistoryWrapper>
   )
 }

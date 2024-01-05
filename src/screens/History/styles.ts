@@ -9,8 +9,6 @@ export const HistoryWrapper = styled.View`
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
 `
 
-export const ListSearchedUsers = styled.FlatList``
-
 export const CardSearchedUser = styled.TouchableOpacity`
   background-color: #fff;
   padding: 16px;
@@ -19,6 +17,7 @@ export const CardSearchedUser = styled.TouchableOpacity`
   flex-direction: row;
   gap: 32px;
   align-items: center;
+  margin-bottom: 8px;
 `
 export const CardSearchedAvatar = styled.Image`
   width: 96px;

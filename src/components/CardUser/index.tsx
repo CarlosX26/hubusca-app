@@ -1,14 +1,17 @@
+import { useGithubContext } from "../../contexts/github"
 import { TextRegular } from "../../theme/typography"
 import { Avatar, LinkMoreInfo, CardWrapper } from "./styles"
 
 export const CardUser = () => {
+  const { userProfile } = useGithubContext()
+
   return (
     <CardWrapper>
-      <Avatar source={require("../../../assets/profile_example.jpg")} />
+      <Avatar source={{ uri: userProfile?.avatar_url }} />
 
-      <TextRegular>Doguinho024</TextRegular>
-      <TextRegular>Doguinho024 Login</TextRegular>
-      <TextRegular>Santa Inês/Ma</TextRegular>
+      <TextRegular>{userProfile?.name}</TextRegular>
+      <TextRegular>{userProfile?.login}</TextRegular>
+      {/* <TextRegular>Santa Inês/Ma</TextRegular> */}
 
       <LinkMoreInfo>{"mais info >"}</LinkMoreInfo>
     </CardWrapper>

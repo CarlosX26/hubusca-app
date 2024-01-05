@@ -1,12 +1,26 @@
+import { ThemeProvider } from "styled-components/native"
+import { Home } from "./src/screens/Home"
+import { useFonts } from "expo-font"
 import { StatusBar } from "expo-status-bar"
-import { Text, View } from "react-native"
+import light from "./src/theme/light"
 
 const App = () => {
+  const [fontsLoaded] = useFonts({
+    "Jua-Regular": require("./assets/fonts/Jua-Regular.ttf"),
+  })
+
+  console.log(fontsLoaded)
+  if (!fontsLoaded) {
+    return null
+  }
+
   return (
-    <View>
-      <StatusBar style="light" />
-      <Text>Open up App.tsx to start working on your app!</Text>
-    </View>
+    <>
+      <StatusBar />
+      <ThemeProvider theme={light}>
+        <Home />
+      </ThemeProvider>
+    </>
   )
 }
 

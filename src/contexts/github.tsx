@@ -1,11 +1,47 @@
-import React, { createContext, useContext, useState } from "react"
+import React, { createContext, useContext, useEffect, useState } from "react"
 import { IGithub, IUserProfile } from "./types"
 import api from "../services/axios"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 const github = createContext({} as IGithub)
 
 export const GithubProvider = ({ children }: { children: React.ReactNode }) => {
   const [userProfile, setUserProfile] = useState<IUserProfile | null>(null)
+  const [profileHistory, setProfileHistory] = useState<IUserProfile[]>([])
+
+  useEffect(() => {
+    ;(async () => {
+      try {
+        const profiles = await AsyncStorage.getItem("@profileHistory")
+        console.log(profiles)
+        if (profiles) {
+          setUserProfile(JSON.parse(profiles))
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    })()
+  }, [])
+
+  const saveProfiles = async (userProfile: IUserProfile) => {
+    try {
+      const filterProfile = profileHistory.filter(
+        (profile) => profile.login == userProfile.login
+      )
+
+      if (filterProfile.length > 0) {
+        return null
+      }
+
+      setProfileHistory([...profileHistory, userProfile])
+      await AsyncStorage.setItem(
+        "@profileHistory",
+        JSON.stringify(profileHistory)
+      )
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const getProfile = async (username: string) => {
     try {
@@ -16,12 +52,11 @@ export const GithubProvider = ({ children }: { children: React.ReactNode }) => {
           `/users/${usernameWithoutSpaces}`
         )
 
+        saveProfiles(data)
         setUserProfile(data)
-
-        console.log(data)
       }
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
@@ -30,7 +65,9 @@ export const GithubProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <github.Provider value={{ getProfile, userProfile, clearSearch }}>
+    <github.Provider
+      value={{ getProfile, userProfile, clearSearch, profileHistory }}
+    >
       {children}
     </github.Provider>
   )

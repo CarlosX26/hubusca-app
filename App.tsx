@@ -1,7 +1,8 @@
 import { ThemeProvider } from "styled-components/native"
-import { Home } from "./src/screens/Home"
 import { useFonts } from "expo-font"
 import { StatusBar } from "expo-status-bar"
+import { NavigationContainer } from "@react-navigation/native"
+import { TabNavigator } from "./src/components/TabNavigator"
 import light from "./src/theme/light"
 
 const App = () => {
@@ -9,18 +10,17 @@ const App = () => {
     "Jua-Regular": require("./assets/fonts/Jua-Regular.ttf"),
   })
 
-  console.log(fontsLoaded)
   if (!fontsLoaded) {
     return null
   }
 
   return (
-    <>
+    <NavigationContainer>
       <StatusBar />
       <ThemeProvider theme={light}>
-        <Home />
+        <TabNavigator />
       </ThemeProvider>
-    </>
+    </NavigationContainer>
   )
 }
 

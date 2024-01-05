@@ -9,8 +9,8 @@ import {
 import { Logo } from "../../components/Logo"
 import { useState } from "react"
 import { Icons } from "../../components/Icons"
-import * as Animatable from "react-native-animatable"
 import { CardUser } from "../../components/CardUser"
+import * as Animatable from "react-native-animatable"
 
 export const Home = () => {
   const [showField, setShowField] = useState(false)

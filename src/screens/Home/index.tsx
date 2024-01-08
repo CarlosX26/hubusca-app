@@ -43,7 +43,7 @@ export const Home = () => {
           duration={500}
         >
           <ButtonSearch onPress={() => setShowField(true)}>
-            <Icons.Search size={32} />
+            <Icons.Search size={32} color="#FFF" />
           </ButtonSearch>
         </Animatable.View>
       )}
@@ -70,7 +70,7 @@ export const Home = () => {
             onChangeText={setUsername}
           />
           <ButtonSearchInput onPress={() => getProfile(username)}>
-            <Icons.Search size={32} />
+            <Icons.Search size={32} color="#FFF" />
           </ButtonSearchInput>
         </InputWrapper>
       )}

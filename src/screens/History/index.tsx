@@ -25,7 +25,9 @@ export const History = () => {
             <BoxInfo>
               <TextRegular fontSize={20}>{item.name}</TextRegular>
               <TextRegular fontSize={20}>{item.login}</TextRegular>
-              {/* <TextRegular fontSize={20}>Doguinho</TextRegular> */}
+              {item.location && (
+                <TextRegular fontSize={20}>{item.location}</TextRegular>
+              )}
             </BoxInfo>
           </CardSearchedUser>
         )}

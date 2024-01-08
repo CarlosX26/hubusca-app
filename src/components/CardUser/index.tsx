@@ -11,7 +11,9 @@ export const CardUser = () => {
 
       <TextRegular>{userProfile?.name}</TextRegular>
       <TextRegular>{userProfile?.login}</TextRegular>
-      {/* <TextRegular>Santa Inês/Ma</TextRegular> */}
+      {userProfile?.location && (
+        <TextRegular>{userProfile.location}</TextRegular>
+      )}
 
       <LinkMoreInfo>{"mais info >"}</LinkMoreInfo>
     </CardWrapper>

@@ -19,11 +19,19 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.carllx26.hubuscaapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "assets": ["./assets/fonts"]
+    "expo": {
+      "assets": ["./assets/fonts"]
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4e7d72b1-662c-47ea-b9c4-3fad0ab07967"
+      }
+    }
   }
 }

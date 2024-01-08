@@ -3,7 +3,6 @@ import { IGithub, IRepository, IUserProfile } from "./types"
 import { Keyboard } from "react-native"
 import api from "../services/axios"
 import AsyncStorage from "@react-native-async-storage/async-storage"
-import axios, { AxiosError } from "axios"
 
 const github = createContext({} as IGithub)
 
@@ -20,7 +19,7 @@ export const GithubProvider = ({ children }: { children: React.ReactNode }) => {
       try {
         const profiles = await AsyncStorage.getItem("@profileHistory")
         if (profiles) {
-          setUserProfile(JSON.parse(profiles))
+          setProfileHistory(JSON.parse(profiles))
         }
       } catch (error) {
         console.error(error)
@@ -55,6 +54,7 @@ export const GithubProvider = ({ children }: { children: React.ReactNode }) => {
   const getProfile = async (username: string) => {
     setLoadingProfile(true)
     setUserIsNotFound(false)
+    setUserProfile(null)
     try {
       const usernameWithoutSpaces = username.trim()
 

@@ -27,3 +27,12 @@ export const ButtonClose = styled.TouchableOpacity`
   top: 32px;
   right: 16px;
 `
+
+export const CardRepository = styled.TouchableOpacity`
+  border: 2px solid #dee2e6;
+  gap: 4px;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 8px;
+  width: 100%;
+`

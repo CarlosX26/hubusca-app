@@ -1,4 +1,5 @@
 import {
+  ButtonClearSearch,
   ButtonSearch,
   ButtonSearchInput,
   HomeWrapper,
@@ -68,7 +69,18 @@ export const Home = () => {
             placeholderTextColor="#FFF"
             onBlur={hiddenInputSearch}
             onChangeText={setUsername}
+            value={username}
           />
+
+          <ButtonClearSearch
+            onPress={() => {
+              clearSearch()
+              setUsername("")
+              setShowField(false)
+            }}
+          >
+            <Icons.Close size={32} color="#FFF" />
+          </ButtonClearSearch>
           <ButtonSearchInput onPress={() => getProfile(username)}>
             <Icons.Search size={32} color="#FFF" />
           </ButtonSearchInput>

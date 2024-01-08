@@ -9,6 +9,7 @@ const github = createContext({} as IGithub)
 export const GithubProvider = ({ children }: { children: React.ReactNode }) => {
   const [userProfile, setUserProfile] = useState<IUserProfile | null>(null)
   const [profileHistory, setProfileHistory] = useState<IUserProfile[]>([])
+  const [currentUser, setCurrentUser] = useState<IUserProfile | null>(null)
 
   useEffect(() => {
     ;(async () => {
@@ -22,6 +23,10 @@ export const GithubProvider = ({ children }: { children: React.ReactNode }) => {
       }
     })()
   }, [])
+
+  const toggleCurrentUser = (user: IUserProfile) => {
+    setCurrentUser(user)
+  }
 
   const saveProfiles = async (userProfile: IUserProfile) => {
     try {
@@ -68,7 +73,14 @@ export const GithubProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <github.Provider
-      value={{ getProfile, userProfile, clearSearch, profileHistory }}
+      value={{
+        getProfile,
+        userProfile,
+        clearSearch,
+        profileHistory,
+        currentUser,
+        toggleCurrentUser,
+      }}
     >
       {children}
     </github.Provider>

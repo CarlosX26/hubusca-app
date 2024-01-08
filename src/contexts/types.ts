@@ -9,4 +9,5 @@ export interface IUserProfile {
   avatar_url: string
   name: string
   login: string
+  location: string
 }

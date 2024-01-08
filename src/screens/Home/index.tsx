@@ -20,7 +20,13 @@ export const Home = () => {
   const [username, setUsername] = useState("")
   const [showCard, setShowCard] = useState(false)
 
-  const { getProfile, userProfile, clearSearch } = useGithubContext()
+  const {
+    getProfile,
+    userProfile,
+    clearSearch,
+    loadingProfile,
+    userIsNotfound,
+  } = useGithubContext()
 
   const hiddenInputSearch = () => {
     if (!Boolean(username.trim())) {
@@ -98,8 +104,11 @@ export const Home = () => {
           </InputWrapper>
         )}
 
-        {!userProfile && <TextInfo>* Pesquise por usuários do Github</TextInfo>}
-
+        {!userProfile && !loadingProfile && (
+          <TextInfo>* Pesquise por usuários do Github</TextInfo>
+        )}
+        {loadingProfile && <TextInfo>Buscando usuário... 🔎</TextInfo>}
+        {userIsNotfound && <TextInfo>Nenhum usuário encontrado!</TextInfo>}
         {userProfile && <CardUser openCard={openCard} />}
       </HomeWrapper>
 

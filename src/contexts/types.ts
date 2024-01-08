@@ -7,6 +7,8 @@ export interface IGithub {
   toggleCurrentUser(user: IUserProfile): void
   getRepositories(): Promise<void>
   repositories: IRepository[]
+  loadingProfile: boolean
+  userIsNotfound: boolean
 }
 
 export interface IUserProfile {

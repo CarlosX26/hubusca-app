@@ -3,7 +3,7 @@ import { useFonts } from "expo-font"
 import { StatusBar } from "expo-status-bar"
 import { NavigationContainer } from "@react-navigation/native"
 import { TabNavigator } from "./src/components/TabNavigator"
-import light from "./src/theme/light"
+import theme from "./src/theme/theme"
 import { GithubProvider } from "./src/contexts/github"
 
 const App = () => {
@@ -19,7 +19,7 @@ const App = () => {
     <GithubProvider>
       <NavigationContainer>
         <StatusBar />
-        <ThemeProvider theme={light}>
+        <ThemeProvider theme={theme}>
           <TabNavigator />
         </ThemeProvider>
       </NavigationContainer>

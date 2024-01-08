@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react"
 import { IGithub, IUserProfile } from "./types"
+import { Keyboard } from "react-native"
 import api from "../services/axios"
 import AsyncStorage from "@react-native-async-storage/async-storage"
 
@@ -53,6 +54,8 @@ export const GithubProvider = ({ children }: { children: React.ReactNode }) => {
 
         saveProfiles(data)
         setUserProfile(data)
+
+        Keyboard.dismiss()
       }
     } catch (error) {
       console.error(error)

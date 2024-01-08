@@ -19,9 +19,14 @@ export const ButtonSearch = styled.TouchableOpacity`
   margin-top: 64px;
 `
 export const ButtonSearchInput = styled(ButtonSearch)`
-  width: 30%;
-  border-radius: 0 56px 56px 0;
   margin: 0;
+  border-radius: 0 56px 56px 0;
+  width: 20%;
+`
+export const ButtonClearSearch = styled(ButtonSearch)`
+  margin: 0;
+  border-radius: 0;
+  width: 20%;
 `
 
 export const InputWrapper = styled(Animatable.View)`
@@ -35,7 +40,7 @@ export const InputWrapper = styled(Animatable.View)`
 export const InputSearch = styled.TextInput`
   background: ${({ theme }) => theme.COLORS.PRIMARY};
   color: #fff;
-  width: 70%;
+  width: 60%;
   height: 80px;
   border-radius: 56px 0 0 56px;
   padding: 16px;

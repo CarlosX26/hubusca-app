@@ -9,16 +9,20 @@ import {
 import { Logo } from "../../components/Logo"
 import { useState } from "react"
 import { Icons } from "../../components/Icons"
-import * as Animatable from "react-native-animatable"
 import { CardUser } from "../../components/CardUser"
+import * as Animatable from "react-native-animatable"
+import { useGithubContext } from "../../contexts/github"
 
 export const Home = () => {
   const [showField, setShowField] = useState(false)
   const [username, setUsername] = useState("")
 
+  const { getProfile, userProfile, clearSearch } = useGithubContext()
+
   const hiddenInputSearch = () => {
     if (!Boolean(username.trim())) {
       setShowField(false)
+      clearSearch()
     }
   }
 
@@ -39,7 +43,7 @@ export const Home = () => {
           duration={500}
         >
           <ButtonSearch onPress={() => setShowField(true)}>
-            <Icons.Search size={32} />
+            <Icons.Search size={32} color="#FFF" />
           </ButtonSearch>
         </Animatable.View>
       )}
@@ -65,15 +69,15 @@ export const Home = () => {
             onBlur={hiddenInputSearch}
             onChangeText={setUsername}
           />
-          <ButtonSearchInput>
-            <Icons.Search size={32} />
+          <ButtonSearchInput onPress={() => getProfile(username)}>
+            <Icons.Search size={32} color="#FFF" />
           </ButtonSearchInput>
         </InputWrapper>
       )}
 
-      {!username && <TextInfo>* Pesquise por usuários do Github</TextInfo>}
+      {!userProfile && <TextInfo>* Pesquise por usuários do Github</TextInfo>}
 
-      {username && <CardUser />}
+      {userProfile && <CardUser />}
     </HomeWrapper>
   )
 }

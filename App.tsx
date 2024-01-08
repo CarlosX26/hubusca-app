@@ -4,6 +4,7 @@ import { StatusBar } from "expo-status-bar"
 import { NavigationContainer } from "@react-navigation/native"
 import { TabNavigator } from "./src/components/TabNavigator"
 import light from "./src/theme/light"
+import { GithubProvider } from "./src/contexts/github"
 
 const App = () => {
   const [fontsLoaded] = useFonts({
@@ -15,12 +16,14 @@ const App = () => {
   }
 
   return (
-    <NavigationContainer>
-      <StatusBar />
-      <ThemeProvider theme={light}>
-        <TabNavigator />
-      </ThemeProvider>
-    </NavigationContainer>
+    <GithubProvider>
+      <NavigationContainer>
+        <StatusBar />
+        <ThemeProvider theme={light}>
+          <TabNavigator />
+        </ThemeProvider>
+      </NavigationContainer>
+    </GithubProvider>
   )
 }
 

@@ -2,11 +2,20 @@ import { useGithubContext } from "../../contexts/github"
 import { TextRegular } from "../../theme/typography"
 import { Avatar, LinkMoreInfo, CardWrapper } from "./styles"
 
-export const CardUser = () => {
-  const { userProfile } = useGithubContext()
+interface ICardUserProps {
+  openCard(): void
+}
+
+export const CardUser = ({ openCard }: ICardUserProps) => {
+  const { userProfile, toggleCurrentUser } = useGithubContext()
 
   return (
-    <CardWrapper>
+    <CardWrapper
+      onPress={() => {
+        toggleCurrentUser(userProfile!)
+        openCard()
+      }}
+    >
       <Avatar source={{ uri: userProfile?.avatar_url }} />
 
       <TextRegular>{userProfile?.name}</TextRegular>

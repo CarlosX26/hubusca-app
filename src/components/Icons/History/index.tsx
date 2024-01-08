@@ -1,11 +1,7 @@
 import { LocalSvg } from "react-native-svg"
+import { IIconsProps } from ".."
 
-interface IHomeProps {
-  color: string
-  size: number
-}
-
-export const History = ({ size, color }: IHomeProps) => (
+export const History = ({ size, color }: IIconsProps) => (
   <LocalSvg
     asset={require("../../../../assets/history_icon.svg")}
     fill={color}

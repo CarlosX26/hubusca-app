@@ -1,6 +1,6 @@
 import styled from "styled-components/native"
 
-export const CardWrapper = styled.View`
+export const CardWrapper = styled.TouchableOpacity`
   margin-top: 32px;
   width: 90%;
   border: 2px solid #dee2e6;

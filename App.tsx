@@ -18,7 +18,7 @@ const App = () => {
   return (
     <GithubProvider>
       <NavigationContainer>
-        <StatusBar />
+        <StatusBar style="auto" />
         <ThemeProvider theme={theme}>
           <TabNavigator />
         </ThemeProvider>

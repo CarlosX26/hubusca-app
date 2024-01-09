@@ -65,7 +65,6 @@ export const Home = () => {
             </ButtonSearch>
           </Animatable.View>
         )}
-
         {showField && (
           <InputWrapper
             animation={{
@@ -103,7 +102,6 @@ export const Home = () => {
             </ButtonSearchInput>
           </InputWrapper>
         )}
-
         {!userProfile && !loadingProfile && (
           <TextInfo>* Pesquise por usuários do Github</TextInfo>
         )}

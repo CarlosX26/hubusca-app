@@ -11,7 +11,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -20,17 +22,19 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.carllx26.hubuscaapp"
+      "package": "com.carllx26.hubusca"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "expo": {
-      "assets": ["./assets/fonts"]
+      "assets": [
+        "./assets/fonts"
+      ]
     },
     "extra": {
       "eas": {
-        "projectId": "4e7d72b1-662c-47ea-b9c4-3fad0ab07967"
+        "projectId": "64685587-efea-43c6-a1ce-8901784311c7"
       }
     }
   }

@@ -1,20 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { ThemeProvider } from "styled-components/native"
+import { useFonts } from "expo-font"
+import { StatusBar } from "expo-status-bar"
+import { NavigationContainer } from "@react-navigation/native"
+import { TabNavigator } from "./src/components/TabNavigator"
+import theme from "./src/theme/theme"
+import { GithubProvider } from "./src/contexts/github"
 
-export default function App() {
+const App = () => {
+  const [fontsLoaded] = useFonts({
+    "Jua-Regular": require("./assets/fonts/Jua-Regular.ttf"),
+  })
+
+  if (!fontsLoaded) {
+    return null
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <GithubProvider>
+      <NavigationContainer>
+        <StatusBar />
+        <ThemeProvider theme={theme}>
+          <TabNavigator />
+        </ThemeProvider>
+      </NavigationContainer>
+    </GithubProvider>
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App

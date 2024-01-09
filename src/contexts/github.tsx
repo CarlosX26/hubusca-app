@@ -1,8 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from "react"
-import { IGithub, IUserProfile } from "./types"
+import { IGithub, IRepository, IUserProfile } from "./types"
 import { Keyboard } from "react-native"
 import api from "../services/axios"
 import AsyncStorage from "@react-native-async-storage/async-storage"
+import axios, { AxiosError } from "axios"
 
 const github = createContext({} as IGithub)
 
@@ -10,6 +11,9 @@ export const GithubProvider = ({ children }: { children: React.ReactNode }) => {
   const [userProfile, setUserProfile] = useState<IUserProfile | null>(null)
   const [profileHistory, setProfileHistory] = useState<IUserProfile[]>([])
   const [currentUser, setCurrentUser] = useState<IUserProfile | null>(null)
+  const [repositories, setRepositories] = useState<IRepository[]>([])
+  const [loadingProfile, setLoadingProfile] = useState(false)
+  const [userIsNotfound, setUserIsNotFound] = useState(false)
 
   useEffect(() => {
     ;(async () => {
@@ -49,6 +53,8 @@ export const GithubProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const getProfile = async (username: string) => {
+    setLoadingProfile(true)
+    setUserIsNotFound(false)
     try {
       const usernameWithoutSpaces = username.trim()
 
@@ -63,12 +69,24 @@ export const GithubProvider = ({ children }: { children: React.ReactNode }) => {
         Keyboard.dismiss()
       }
     } catch (error) {
+      setUserIsNotFound(true)
+    } finally {
+      setLoadingProfile(false)
+    }
+  }
+
+  const getRepositories = async () => {
+    try {
+      const { data } = await api.get<IRepository[]>(currentUser!.repos_url)
+      setRepositories(data)
+    } catch (error) {
       console.error(error)
     }
   }
 
   const clearSearch = () => {
     setUserProfile(null)
+    setUserIsNotFound(false)
   }
 
   return (
@@ -80,6 +98,10 @@ export const GithubProvider = ({ children }: { children: React.ReactNode }) => {
         profileHistory,
         currentUser,
         toggleCurrentUser,
+        getRepositories,
+        repositories,
+        loadingProfile,
+        userIsNotfound,
       }}
     >
       {children}
